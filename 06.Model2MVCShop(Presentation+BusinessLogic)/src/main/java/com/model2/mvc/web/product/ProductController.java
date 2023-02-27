@@ -145,6 +145,8 @@ public class ProductController {
 		System.out.println("/listProduct.do");
 		
 		System.out.println("menu type : "+menu);
+		System.out.println("받아온 searchCondition : "+search.getSearchCondition());
+		System.out.println("받아온 searchKeyword: "+search.getSearchKeyword());
 		
 		if(search.getCurrentPage() ==0 ){
 			search.setCurrentPage(1);

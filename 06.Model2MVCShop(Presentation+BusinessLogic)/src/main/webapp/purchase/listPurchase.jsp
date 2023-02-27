@@ -81,18 +81,16 @@
 			<td align="left">${purchase.receiverPhone}</td>
 			<td></td>
 			<td align="left">
-			//${purchase.tranCode}//
-			// ${purchase.tranCode == "1" } //
 				<c:if test="${!(purchase.tranCode eq '0')}">
-					<c:if test="${purchase.tranCode eq '1' }">
-						
+					<c:if test="${purchase.tranCode.trim() eq '1' }">
+						구매완료
 					</c:if>
 					
-					<c:if test="${purchase.tranCode eq '2' }">
+					<c:if test="${purchase.tranCode.trim() eq '2' }">
 						배송 중
 					</c:if>
 					
-					<c:if test="${purchase.tranCode eq '3' }">
+					<c:if test="${purchase.tranCode.trim() eq '3' }">
 						배송 완료
 					</c:if>
 				</c:if>
@@ -101,11 +99,15 @@
 			
    		<td align="left">
    		
-		<c:if test = "${purchase.tranCode eq '2'}">
+   		<c:if test = "${purchase.tranCode.trim() eq '3' }">
+			배송 완료
+		</c:if>
+   		
+		<c:if test = "${purchase.tranCode.trim() eq '2'}">
 			<a href="/updateTranCode.do?tranNo=${purchase.tranNo}&tranCode=3&page=${pageresult.currentPage}">제품수령</a>
 		</c:if>
 		
-		<c:if test = "${purchase.tranCode eq '1' }">
+		<c:if test = "${purchase.tranCode.trim() eq '1' }">
 			배송 전
 		</c:if>
 		</td>

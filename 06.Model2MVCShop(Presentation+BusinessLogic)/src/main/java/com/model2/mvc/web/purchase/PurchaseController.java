@@ -212,7 +212,7 @@ public class PurchaseController {
 		purchaseService.updateTranCode(purchase);
 		
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName(currentPage);
+		modelAndView.setViewName("forward:/listPurchase.do?&currentPage="+currentPage);
 		
 		System.out.println("forward:/listPurchase.do?&currentPage="+currentPage);
 		
@@ -223,26 +223,18 @@ public class PurchaseController {
 	@RequestMapping("/updateTranCodeByProd.do")
 	public ModelAndView updateTranCodeByProd (@RequestParam("prodNo") int prodNo, 
 																@RequestParam("tranCode") String tranCode,
-																@RequestParam("searchCondition") String searchCondition,
-																@RequestParam("searchKeyword") String searchKeyword,
-																@RequestParam("currentPage") String currentPage) throws Exception {
+																@ModelAttribute("search") Search search) throws Exception {
 		
 		Product product = productService.getProduct(prodNo);
 		Purchase purchase = new Purchase();
 		purchase.setPurchaseProd(product);
 		purchase.setTranCode(tranCode);
 		
-		if(searchCondition.equals(null)) {
-			searchCondition = "";
-		}
-		
-		if(searchKeyword.equals(null)) {
-			searchKeyword = "";
-		}
+		System.out.println("currentPage = "+search.getCurrentPage());
 		
 		purchaseService.updateTranCodeByProd(purchase);
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("forward:/listProduct.do?menu=manage&searchCondition="+searchCondition+"&searchKeyword="+searchKeyword+"&currentPage="+currentPage);
+		modelAndView.setViewName("forward:/listProduct.do?menu=manage");//&searchCondition="+search.getSearchCondition()+"&searchKeyword="+search.getSearchKeyword()+"&currentPage="+search.getCurrentPage());
 		return modelAndView;
 	}
 }
