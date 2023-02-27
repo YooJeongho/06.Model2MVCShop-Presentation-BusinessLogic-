@@ -232,6 +232,14 @@ public class PurchaseController {
 		purchase.setPurchaseProd(product);
 		purchase.setTranCode(tranCode);
 		
+		if(searchCondition.equals(null)) {
+			searchCondition = "";
+		}
+		
+		if(searchKeyword.equals(null)) {
+			searchKeyword = "";
+		}
+		
 		purchaseService.updateTranCodeByProd(purchase);
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("forward:/listProduct.do?menu=manage&searchCondition="+searchCondition+"&searchKeyword="+searchKeyword+"&currentPage="+currentPage);
